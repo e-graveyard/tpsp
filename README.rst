@@ -1,2 +1,2 @@
-SPT: São Paulo Public Transportation
+TPS: Transporte Público de São Paulo
 ====================================
