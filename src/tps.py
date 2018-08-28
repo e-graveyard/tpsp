@@ -15,7 +15,7 @@ try:
     from colorama import Fore
     from colorama import Style
 
-    init()
+    init(autoreset=True)
 
 except ImportError as e:
     print('SPT: impossible to import 3rd-party libraries.\n'
@@ -73,24 +73,40 @@ class Metro(DataSource):
             }
 
 
+def beautify(data):
+    def header(cols):
+        H = []
+        for c in cols:
+            H.append('{}{}{}'.format(Style.BRIGHT, c, Style.RESET_ALL))
+
+        return H
+
+    beautiful_data = []
+    for d in data:
+        line = d['line']
+        stat = d['status']
+
+        color = Fore.WHITE
+        if stat.lower() == 'operação normal':
+            color = Fore.GREEN
+
+        elif stat == 'velocidade reduzida':
+            color = Fore.YELLOW
+
+        beautiful_data.append([
+            '{}'.format(line),
+            '{}{}{}'.format(color, stat, Style.RESET_ALL)
+        ])
+
+    return tabulate(beautiful_data, headers=header(['Linha', 'Status']))
+
+
 def main():
     cptm = CPTM()
     metro = Metro()
 
-    cptm_line_status = []
-    for c in cptm.fetch_data():
-        cptm_line_status.append([
-            c['line'], c['status']
-        ])
-
-    metro_line_status = []
-    for m in metro.fetch_data():
-        metro_line_status.append([
-            m['line'], c['status']
-        ])
-
-    print(tabulate(cptm_line_status, headers=['Linha', 'Status']))
-    print(tabulate(metro_line_status, headers=['Linha', 'Status']))
+    print(beautify(cptm.fetch_data()) + '\n')
+    print(beautify(metro.fetch_data()))
 
 
 if __name__ == '__main__':
