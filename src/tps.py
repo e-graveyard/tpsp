@@ -24,15 +24,112 @@ except ImportError as e:
     sys.exit(1)
 
 
+PROGRAM_NAME    = 'tps'
+PROGRAM_AUTHOR  = 'Caian R. Ertl'
+PROGRAM_VERSION = 'v0.1.0'
+
+COPYRIGHT_INFO  = """
+** MIT License **
+
+Copyright (c) 2018 Caian Rais Ertl
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
+
+
 class CLI:
-    pass
+    def __init__(self):
+        ds = DataSource()
+        self.sources = [s for s in ds.all]
+
+        self.parser = ArgumentParser(
+            prog=PROGRAM_NAME,
+            formatter_class=RawTextHelpFormatter,
+
+            description=textwrap.dedent('''\
+                tps: transporte público de São Paulo
+
+                tps (portuguese for "São Paulo public transportation")
+                is a tiny command-line tool that tells you the current
+                status of CPTM's and Metro lines.
+                '''),
+
+            epilog=textwrap.dedent('''\
+                examples:
+                    $ tps -s cptm
+                    # => shows the current state of all CPTM lines
+
+                    $ tps -s metro --json
+                    # => shows the current state of all Metro lines and formats
+                         the output in JSON
+
+                This is a Free and Open-Source Software (FOSS).
+                Licensed under the MIT License.
+
+                Project page: <https://github.com/caianrais/dora>'''))
+
+        # --------------------------------------------------
+
+        self.parser.add_argument(
+            'service',
+            action='store',
+            choices=self.sources,
+            default=self.sources[0],
+            nargs=1,
+            type=str,
+            help='the public transportation service')
+
+        self.parser.add_argument(
+            '-v', '--version',
+            action='version',
+            version='{0} ({1})'.format(
+                PROGRAM_NAME, PROGRAM_VERSION
+            ),
+            help='show the program version and exit')
+
+        self.parser.add_argument(
+            '-j', '--json',
+            action='store_true',
+            dest='json',
+            help='show the output in JSON format')
+
+        self.parser.add_argument(
+            '--copyright',
+            action='store_true',
+            dest='copyright',
+            help='show the copyright information and exit')
+
+    def act(self):
+        argp = self.parser.parse_args()
+
+        if argp.copyright:
+            print(COPYRIGHT_INFO)
+
+        else:
+            pass
 
 
 class DataSource:
     @property
     def all(self):
         for ds in DataSource.__subclasses__():
-            yield ds
+            yield ds.__name__.lower()
 
 
 class CPTM(DataSource):
@@ -105,11 +202,8 @@ def beautify(data):
 
 
 def main():
-    cptm = CPTM()
-    metro = Metro()
-
-    print(beautify(cptm.fetch_data()) + '\n')
-    print(beautify(metro.fetch_data()))
+    cli = CLI()
+    cli.act()
 
 
 if __name__ == '__main__':
