@@ -86,16 +86,19 @@ def beautify(data):
         line = d['line']
         stat = d['status']
 
-        color = Fore.WHITE
+        formatting = Fore.WHITE
         if stat.lower() == 'operação normal':
-            color = Fore.GREEN
+            formatting = Fore.GREEN
 
         elif stat == 'velocidade reduzida':
-            color = Fore.YELLOW
+            formatting = Fore.YELLOW
+
+        elif stat == 'operação encerrada':
+            formatting = Style.DIM
 
         beautiful_data.append([
             '{}'.format(line),
-            '{}{}{}'.format(color, stat, Style.RESET_ALL)
+            '{}{}{}'.format(formatting, stat, Style.RESET_ALL)
         ])
 
     return tabulate(beautiful_data, headers=header(['Linha', 'Status']))
