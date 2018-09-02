@@ -115,13 +115,7 @@ class CLI:
             help='show the copyright information and exit')
 
     def act(self):
-        argp = self.parser.parse_args()
-
-        if argp.copyright:
-            print(COPYRIGHT_INFO)
-
-        else:
-            pass
+        return self.parser.parse_args()
 
 
 class Service:
