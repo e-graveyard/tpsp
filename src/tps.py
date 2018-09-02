@@ -55,8 +55,7 @@ SOFTWARE.
 
 class CLI:
     def __init__(self):
-        ds = DataSource()
-        self.sources = [s for s in ds.all]
+        self.sources = [s for s in Service.all()]
 
         self.parser = ArgumentParser(
             prog=PROGRAM_NAME,
@@ -125,14 +124,14 @@ class CLI:
             pass
 
 
-class DataSource:
-    @property
-    def all(self):
-        for ds in DataSource.__subclasses__():
+class Service:
+    @staticmethod
+    def all():
+        for ds in Service.__subclasses__():
             yield ds.__name__.lower()
 
 
-class CPTM(DataSource):
+class CPTM(Service):
     def __init__(self):
         self.url = 'http://cptm.sp.gov.br/'
         self.session = HTMLSession()
@@ -150,7 +149,7 @@ class CPTM(DataSource):
             }
 
 
-class Metro(DataSource):
+class Metro(Service):
     def __init__(self):
         self.url = 'http://www.metro.sp.gov.br/sistemas/direto-do-metro-via4/index.aspx'
         self.session = HTMLSession()
