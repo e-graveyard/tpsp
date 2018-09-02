@@ -180,16 +180,16 @@ def beautify(data):
     beautiful_data = []
     for d in data:
         line = d['line']
-        stat = d['status']
+        stat = d['status'].lower()
 
         formatting = Fore.WHITE
-        if stat.lower() == 'operação normal':
+        if 'normal' in stat:
             formatting = Fore.GREEN
 
-        elif stat == 'velocidade reduzida':
+        elif 'reduzida' in stat:
             formatting = Fore.YELLOW
 
-        elif stat == 'operação encerrada':
+        elif 'encerrada' in stat:
             formatting = Style.DIM
 
         beautiful_data.append([
