@@ -163,35 +163,44 @@ class Metro(Service):
             }
 
 
-def beautify(data):
-    def header(cols):
-        H = []
-        for c in cols:
-            H.append('{}{}{}'.format(Style.BRIGHT, c, Style.RESET_ALL))
+class Output:
+    def __init__(self, data):
+        self.data = data
 
-        return H
+    @property
+    def table(self):
+        def header(cols):
+            for c in cols:
+                yield '{}{}{}'.format(Style.BRIGHT, c, Style.RESET_ALL)
 
-    beautiful_data = []
-    for d in data:
-        line = d['line']
-        stat = d['status'].lower()
+        def line_status(status):
+            color = Fore.WHITE
+            if 'normal' in status:
+                color = Fore.GREEN
 
-        formatting = Fore.WHITE
-        if 'normal' in stat:
-            formatting = Fore.GREEN
+            elif 'reduzida' in status:
+                color = Fore.YELLOW
 
-        elif 'reduzida' in stat:
-            formatting = Fore.YELLOW
+            elif 'encerrada' in status:
+                color = Style.DIM
 
-        elif 'encerrada' in stat:
-            formatting = Style.DIM
+            return '{}{}{}'.format(color, status, Style.RESET_ALL)
 
-        beautiful_data.append([
-            '{}'.format(line),
-            '{}{}{}'.format(formatting, stat, Style.RESET_ALL)
-        ])
+        def beautify():
+            for d in self.data:
+                yield [
+                    d['line'], line_status(d['status'].lower())
+                ]
 
-    return tabulate(beautiful_data, headers=header(['Linha', 'Status']))
+        cols = ['Linha', 'Status']
+        data = [d for d in beautify()]
+        head = [h for h in header(cols)]
+
+        return tabulate(data, headers=head)
+
+    @property
+    def json(self):
+        pass
 
 
 def main():
