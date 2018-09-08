@@ -4,6 +4,8 @@
 # Standard libraries. Should not fail.
 import sys
 import textwrap
+
+from argparse import Action
 from argparse import ArgumentParser
 from argparse import RawTextHelpFormatter
 
@@ -110,12 +112,21 @@ class CLI:
 
         self.parser.add_argument(
             '--copyright',
-            action='store_true',
-            dest='copyright',
+            action=Copyright,
+            nargs=0,
             help='show the copyright information and exit')
 
     def act(self):
         return self.parser.parse_args()
+
+
+class Copyright(Action):
+    def __init__(self, option_strings, dest, **kwargs):
+        super(Copyright, self).__init__(option_strings, dest, **kwargs)
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        print(COPYRIGHT_INFO)
+        sys.exit(0)
 
 
 class Service:
