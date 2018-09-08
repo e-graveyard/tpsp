@@ -3,6 +3,7 @@
 
 # Standard libraries. Should not fail.
 import sys
+import json
 import textwrap
 
 from argparse import Action
@@ -211,7 +212,16 @@ class Output:
 
     @property
     def json(self):
-        pass
+        return json.dumps(
+            {
+                'code': 200,
+                'data': [d for d in self.data],
+                'message': 'success'
+            },
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=4
+        )
 
 
 def fetch(service):
