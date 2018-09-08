@@ -92,7 +92,6 @@ class CLI:
             'service',
             action='store',
             choices=self.sources,
-            default=self.sources[0],
             nargs=1,
             type=str,
             help='the public transportation service')
