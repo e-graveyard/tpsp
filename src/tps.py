@@ -239,11 +239,9 @@ def main():
     data = fetch(args.service)
     outp = Output(data)
 
-    if args.json:
-        print(outp.json)
-
-    else:
-        print(outp.table)
+    print('\n{}'.format(
+        outp.json if args.json else outp.table
+    ))
 
 
 if __name__ == '__main__':
