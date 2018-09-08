@@ -1,6 +1,6 @@
 # TPS: Transporte Público de São Paulo
 
-`tps` (acrônimo de "Transporte Público de São Paulo") é uma pequena aplicação
+`tps` (acrônimo para "Transporte Público de São Paulo") é uma pequena aplicação
 escrita em Python cujo objetivo é exibir o estado atual das linhas da [CPTM] e
 [Metro].
 
@@ -36,7 +36,8 @@ Não há, até a data de publicação desta aplicação, uma API pública para o
 serviços de trem e metrô do Estado de São Paulo. Os dados utilizados por esta
 aplicação são obtidos mediante [web scraping] das páginas online dos serviços.
 
-O fluxo é relativamente simples:
+**O fluxo é relativamente simples:**
+
 1. O parser recebe os argumentos e flags da linha de comando;
 1. Uma requisição `GET` é enviada à página do serviço a ser consultado;
 1. O conteúdo `HTML` é analisado, quebrado a partir da estrutura e filtrado;
@@ -65,7 +66,7 @@ $ (sudo) pip3 install requests-html colorama tabulate
 $ mv src/tps.py ~/bin
 ```
 
-*Em breve: `tps` no PyPI*
+*Em breve: `tps` no PyPI.*
 
 
 ## Uso
