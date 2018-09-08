@@ -21,7 +21,7 @@ try:
     init(autoreset=True)
 
 except ImportError as e:
-    print('SPT: impossible to import 3rd-party libraries.\n'
+    print('TPS: impossible to import 3rd-party libraries.\n'
           'Latest traceback: {0}' . format(e.args[0]))
 
     sys.exit(1)
@@ -74,17 +74,17 @@ class CLI:
 
             epilog=textwrap.dedent('''\
                 examples:
-                    $ tps -s cptm
+                    $ tps cptm
                     # => shows the current state of all CPTM lines
 
-                    $ tps -s metro --json
+                    $ tps metro --json
                     # => shows the current state of all Metro lines and formats
                          the output in JSON
 
                 This is a Free and Open-Source Software (FOSS).
                 Licensed under the MIT License.
 
-                Project page: <https://github.com/caianrais/dora>'''))
+                Project page: <https://github.com/caianrais/tps>'''))
 
         # --------------------------------------------------
 
