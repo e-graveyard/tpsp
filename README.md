@@ -4,6 +4,8 @@
 escrita em Python cujo objetivo é exibir o estado atual das linhas da [CPTM] e
 [Metro].
 
+![screencast](tps.gif)
+
 **AVISO: Este projeto não possui relações com o Estado de São Paulo, a CPTM, o
 Metro ou qualquer outro órgão governamental.**
 
