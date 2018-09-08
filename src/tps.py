@@ -154,7 +154,7 @@ class CPTM(Service):
             }
 
 
-class Metro(Service):
+class METRO(Service):
     def __init__(self):
         self.url = 'http://www.metro.sp.gov.br/sistemas/direto-do-metro-via4/index.aspx'
         self.session = HTMLSession()
@@ -195,7 +195,7 @@ class Output:
             elif 'encerrada' in status:
                 color = Style.DIM
 
-            return '{}{}{}'.format(color, status, Style.RESET_ALL)
+            return '{}{}{}'.format(color, status.title(), Style.RESET_ALL)
 
         def beautify():
             for d in self.data:
@@ -214,9 +214,23 @@ class Output:
         pass
 
 
+def fetch(service):
+    service = getattr(sys.modules[__name__], service[0].upper())
+    return service().fetch_data()
+
+
 def main():
     cli = CLI()
-    cli.act()
+    args = cli.act()
+
+    data = fetch(args.service)
+    outp = Output(data)
+
+    if args.json:
+        print(outp.json)
+
+    else:
+        print(outp.table)
 
 
 if __name__ == '__main__':
