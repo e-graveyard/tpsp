@@ -193,6 +193,9 @@ class Output:
             elif 'reduzida' in status:
                 color = Fore.YELLOW
 
+            elif 'paralisada' in status:
+                color = Fore.RED
+
             elif 'encerrada' in status:
                 color = Style.DIM
 
