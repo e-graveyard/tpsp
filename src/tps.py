@@ -3,7 +3,10 @@
 
 # Standard libraries. Should not fail.
 import sys
+import json
 import textwrap
+
+from argparse import Action
 from argparse import ArgumentParser
 from argparse import RawTextHelpFormatter
 
@@ -18,7 +21,7 @@ try:
     init(autoreset=True)
 
 except ImportError as e:
-    print('SPT: impossible to import 3rd-party libraries.\n'
+    print('TPS: impossible to import 3rd-party libraries.\n'
           'Latest traceback: {0}' . format(e.args[0]))
 
     sys.exit(1)
@@ -71,17 +74,17 @@ class CLI:
 
             epilog=textwrap.dedent('''\
                 examples:
-                    $ tps -s cptm
+                    $ tps cptm
                     # => shows the current state of all CPTM lines
 
-                    $ tps -s metro --json
+                    $ tps metro --json
                     # => shows the current state of all Metro lines and formats
                          the output in JSON
 
                 This is a Free and Open-Source Software (FOSS).
                 Licensed under the MIT License.
 
-                Project page: <https://github.com/caianrais/dora>'''))
+                Project page: <https://github.com/caianrais/tps>'''))
 
         # --------------------------------------------------
 
@@ -89,7 +92,6 @@ class CLI:
             'service',
             action='store',
             choices=self.sources,
-            default=self.sources[0],
             nargs=1,
             type=str,
             help='the public transportation service')
@@ -110,12 +112,21 @@ class CLI:
 
         self.parser.add_argument(
             '--copyright',
-            action='store_true',
-            dest='copyright',
+            action=Copyright,
+            nargs=0,
             help='show the copyright information and exit')
 
     def act(self):
         return self.parser.parse_args()
+
+
+class Copyright(Action):
+    def __init__(self, option_strings, dest, **kwargs):
+        super(Copyright, self).__init__(option_strings, dest, **kwargs)
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        print(COPYRIGHT_INFO)
+        sys.exit(0)
 
 
 class Service:
@@ -143,7 +154,7 @@ class CPTM(Service):
             }
 
 
-class Metro(Service):
+class METRO(Service):
     def __init__(self):
         self.url = 'http://www.metro.sp.gov.br/sistemas/direto-do-metro-via4/index.aspx'
         self.session = HTMLSession()
@@ -181,10 +192,13 @@ class Output:
             elif 'reduzida' in status:
                 color = Fore.YELLOW
 
+            elif 'paralisada' in status:
+                color = Fore.RED
+
             elif 'encerrada' in status:
                 color = Style.DIM
 
-            return '{}{}{}'.format(color, status, Style.RESET_ALL)
+            return '{}{}{}'.format(color, status.title(), Style.RESET_ALL)
 
         def beautify():
             for d in self.data:
@@ -200,12 +214,33 @@ class Output:
 
     @property
     def json(self):
-        pass
+        return json.dumps(
+            {
+                'code': 200,
+                'data': [d for d in self.data],
+                'message': 'success'
+            },
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=4
+        )
+
+
+def fetch(service):
+    service = getattr(sys.modules[__name__], service[0].upper())
+    return service().fetch_data()
 
 
 def main():
     cli = CLI()
-    cli.act()
+    args = cli.act()
+
+    data = fetch(args.service)
+    outp = Output(data)
+
+    print('\n{}'.format(
+        outp.json if args.json else outp.table
+    ))
 
 
 if __name__ == '__main__':
