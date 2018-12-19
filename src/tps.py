@@ -140,13 +140,12 @@ class CPTM(Service):
     def __init__(self):
         self.url = 'http://cptm.sp.gov.br/'
         self.session = HTMLSession()
-        self.html_line_refs = ['rubi', 'diamante', 'esmeralda', 'turquesa',
-                               'coral', 'safira', 'jade']
 
     def fetch_data(self):
+        refs = ['rubi', 'diamante', 'esmeralda', 'turquesa', 'coral', 'safira', 'jade']
         res = self.session.get(self.url)
 
-        for ref in self.html_line_refs:
+        for ref in refs:
             data = res.html.find('.{0}'.format(ref), first=True)
             yield {
                 'line': ref.capitalize(),
@@ -156,21 +155,25 @@ class CPTM(Service):
 
 class METRO(Service):
     def __init__(self):
-        self.url = 'http://www.metro.sp.gov.br/sistemas/direto-do-metro-via4/index.aspx'
+        self.url = 'http://www.metro.sp.gov.br/Sistemas/direto-do-metro-via4/diretodoMetroHome.aspx'
         self.session = HTMLSession()
-        self.html_line_refs = ['l1', 'l2', 'l3', 'l4', 'l5', 'l15']
 
     def fetch_data(self):
         res = self.session.get(self.url)
 
-        for ref in self.html_line_refs:
-            data = res.html.find('.{0}'.format(ref), first=True)
+        names = res.html.find('.{0}'.format('nomeDaLinha'))
+        stati = res.html.find('.{0}'.format('statusDaLinha'))
 
-            _, data = tuple(data.text.split('-'))
-            data = data.split(' ')
+        for i in range(len(names)):
+            name = names[i].text
+            name = name.split('-')[1]
+            name = name.strip()
+
+            status = stati[i].text
+
             yield {
-                'line': data[0],
-                'status': ' '.join(map(str, data[1:]))
+                'line': name,
+                'status': status
             }
 
 
