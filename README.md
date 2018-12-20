@@ -1,11 +1,11 @@
-# TPS: Transporte Público de São Paulo
+# TPSP: Transporte Público de São Paulo
 
-`tps` (acrônimo para "Transporte Público de São Paulo") é uma pequena aplicação
+`tpsp` (acrônimo para "Transporte Público de São Paulo") é uma pequena aplicação
 escrita em Python cujo objetivo é exibir o estado atual das linhas da [CPTM] e
 [Metro].
 
 <p align="center">
-  <img src="tps.gif">
+  <img src="tpsp.gif">
 </p>
 
 **AVISO: Este projeto não possui relações com o Estado de São Paulo, a CPTM, o
@@ -60,17 +60,8 @@ approach encontrado.
 ## Instalação
 
 ```sh
-# clone o repositório
-$ git clone https://github.com/caianrais/tps && cd tps
-
-# instale as dependências
-$ (sudo) pip3 install requests-html colorama tabulate
-
-# mova o script para algum diretório mapeado na variável de ambiente $PATH
-$ mv src/tps.py ~/bin
+$ pip3 install tpsp
 ```
-
-*Em breve: `tps` no PyPI.*
 
 
 ## Uso
@@ -86,10 +77,10 @@ optional arguments:
   --copyright    show the copyright information and exit
 
 examples:
-    $ tps cptm
+    $ tpsp cptm
     # => shows the current state of all CPTM lines
 
-    $ tps metro --json
+    $ tpsp metro --json
     # => shows the current state of all Metro lines and formats
          the output in JSON
 ```
