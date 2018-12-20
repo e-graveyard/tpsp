@@ -29,7 +29,7 @@ except ImportError as e:
 
 PROGRAM_NAME    = 'tps'
 PROGRAM_AUTHOR  = 'Caian R. Ertl'
-PROGRAM_VERSION = 'v0.1.0'
+PROGRAM_VERSION = 'v0.1.2'
 
 COPYRIGHT_INFO  = """
 ** MIT License **
