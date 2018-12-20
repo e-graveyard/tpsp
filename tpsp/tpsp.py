@@ -21,7 +21,7 @@ try:
     init(autoreset=True)
 
 except ImportError as e:
-    print('TPS: impossible to import 3rd-party libraries.\n'
+    print('TPSP: impossible to import 3rd-party libraries.\n'
           'Latest traceback: {0}' . format(e.args[0]))
 
     sys.exit(1)
@@ -29,7 +29,7 @@ except ImportError as e:
 
 PROGRAM_NAME    = 'tpsp'
 PROGRAM_AUTHOR  = 'Caian R. Ertl'
-PROGRAM_VERSION = 'v0.1.2'
+PROGRAM_VERSION = 'v0.1.3'
 
 COPYRIGHT_INFO  = """
 ** MIT License **
@@ -65,26 +65,26 @@ class CLI:
             formatter_class=RawTextHelpFormatter,
 
             description=textwrap.dedent('''\
-                tps: transporte público de São Paulo
+                tpsp: transporte público de São Paulo
 
-                tps (portuguese for "São Paulo public transportation")
+                tpsp (portuguese for "São Paulo public transportation")
                 is a tiny command-line tool that tells you the current
                 status of CPTM's and Metro lines.
                 '''),
 
             epilog=textwrap.dedent('''\
                 examples:
-                    $ tps cptm
+                    $ tpsp cptm
                     # => shows the current state of all CPTM lines
 
-                    $ tps metro --json
+                    $ tpsp metro --json
                     # => shows the current state of all Metro lines and formats
                          the output in JSON
 
                 This is a Free and Open-Source Software (FOSS).
                 Licensed under the MIT License.
 
-                Project page: <https://github.com/caianrais/tps>'''))
+                Project page: <https://github.com/caianrais/tpsp>'''))
 
         # --------------------------------------------------
 

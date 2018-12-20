@@ -18,7 +18,7 @@ URL             = 'https://github.com/caianrais/tps'
 EMAIL           = 'caianrais@pm.me'
 AUTHOR          = 'Caian R. Ertl'
 REQUIRES_PYTHON = '>=3.4.0'
-VERSION         = '0.1.2'
+VERSION         = '0.1.3'
 REQUIRED        = [
     'requests-html', 'colorama', 'tabulate'
 ]
