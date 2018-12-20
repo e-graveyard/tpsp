@@ -105,7 +105,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'tps = tps.tps:main'
+            'tpsp = tpsp.tpsp:main'
         ]
     },
     # $ setup.py publish support.
