@@ -27,7 +27,7 @@ except ImportError as e:
     sys.exit(1)
 
 
-PROGRAM_NAME    = 'tps'
+PROGRAM_NAME    = 'tpsp'
 PROGRAM_AUTHOR  = 'Caian R. Ertl'
 PROGRAM_VERSION = 'v0.1.2'
 
