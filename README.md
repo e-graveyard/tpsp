@@ -84,3 +84,21 @@ examples:
     # => shows the current state of all Metro lines and formats
          the output in JSON
 ```
+
+## Licença
+
+[![Kopimi Logo][kopimi-logo]][kopimi-url]
+
+Na medida do possível sob a lei, [Caian Rais Ertl][me] renunciou a __todos os
+direitos autorais e direitos relacionados ou adjacentes a este trabalho__. No
+espírito da _liberdade de informação_, encorajo você a forkar, modificar,
+alterar, compartilhar ou fazer o que quiser com este projeto! `^ C ^ V`
+
+[![License][cc-shield]][cc-url]
+
+[me]: https://github.com/caiertl
+[cc-shield]: https://forthebadge.com/images/badges/cc-0.svg
+[cc-url]: http://creativecommons.org/publicdomain/zero/1.0
+
+[kopimi-logo]: https://gist.githubusercontent.com/xero/cbcd5c38b695004c848b73e5c1c0c779/raw/6b32899b0af238b17383d7a878a69a076139e72d/kopimi-sm.png
+[kopimi-url]: https://kopimi.com
