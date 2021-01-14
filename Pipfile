@@ -9,6 +9,14 @@ colorama = "*"
 tabulate = "*"
 
 [dev-packages]
+pylint-fail-under = "*"
+pylint = "*"
+argh = "*"
+black = "*"
+jedi = "*"
 
 [requires]
 python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
