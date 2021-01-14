@@ -53,7 +53,7 @@ For more information, please see
 
 class CLI:
     def __init__(self):
-        self.sources = [service for service in Service.all()]
+        self.sources = list(Service.all())
 
         self.parser = ArgumentParser(
             prog=PROGRAM_NAME,
@@ -140,7 +140,7 @@ class Service:
 
 class CPTM(Service):
     def __init__(self):
-        self.url = 'http://cptm.sp.gov.br/'
+        self.url = 'https://www.cptm.sp.gov.br/Pages/Home.aspx'
         self.session = HTMLSession()
 
     def fetch_data(self):
@@ -166,14 +166,11 @@ class METRO(Service):
         names = res.html.find('.{0}'.format('nomeDaLinha'))
         stati = res.html.find('.{0}'.format('statusDaLinha'))
 
-        for idx in range(len(names)):
-            name = names[idx].text
-            name = name.split('-')[1]
-            name = name.strip()
-
+        for idx, name in enumerate(names):
+            line = name.text.split('-')[1]
             status = stati[idx].text
 
-            yield {'line': name, 'status': status}
+            yield {'line': line.strip(), 'status': status}
 
 
 class Output:
@@ -219,20 +216,12 @@ class Output:
         )
 
 
-def fetch(service):
-    service = getattr(sys.modules[__name__], service[0].upper())
-    return service().fetch_data()
-
-
 def main():
     cli = CLI()
     args = cli.act()
 
-    data = fetch(args.service)
+    service = getattr(sys.modules[__name__], args.service[0].upper())
+    data = service().fetch_data()
     outp = Output(data)
 
     print('\n{}'.format(outp.json if args.json else outp.table))
-
-
-if __name__ == '__main__':
-    main()
