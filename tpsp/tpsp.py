@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 # Standard libraries. Should not fail.
 import sys
 import json
@@ -20,59 +17,58 @@ try:
 
     init(autoreset=True)
 
-except ImportError as e:
-    print('TPSP: impossible to import 3rd-party libraries.\n'
-          'Latest traceback: {0}' . format(e.args[0]))
+except ImportError as err:
+    print(
+        'TPSP: impossible to import 3rd-party libraries.\n'
+        'Latest traceback: {0}'.format(err.args[0])
+    )
 
     sys.exit(1)
 
 
-PROGRAM_NAME    = 'tpsp'
-PROGRAM_AUTHOR  = 'Caian R. Ertl'
+PROGRAM_NAME = 'tpsp'
+PROGRAM_AUTHOR = 'Caian R. Ertl'
 PROGRAM_VERSION = 'v0.1.3'
 
-COPYRIGHT_INFO  = """
-** MIT License **
+COPYRIGHT_INFO = """
+The person who associated a work with this deed has dedicated the work to the
+public domain by waiving all of his or her rights to the work worldwide under
+copyright law, including all related and neighboring rights, to the extent
+allowed by law.
 
-Copyright (c) 2018 Caian Rais Ertl
+You can copy, modify, distribute and perform the work, even for commercial
+purposes, all without asking permission.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+AFFIRMER OFFERS THE WORK AS-IS AND MAKES NO REPRESENTATIONS OR WARRANTIES OF
+ANY KIND CONCERNING THE WORK, EXPRESS, IMPLIED, STATUTORY OR OTHERWISE,
+INCLUDING WITHOUT LIMITATION WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE, NON INFRINGEMENT, OR THE ABSENCE OF LATENT OR OTHER
+DEFECTS, ACCURACY, OR THE PRESENT OR ABSENCE OF ERRORS, WHETHER OR NOT
+DISCOVERABLE, ALL TO THE GREATEST EXTENT PERMISSIBLE UNDER APPLICABLE LAW.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+For more information, please see
+<http://creativecommons.org/publicdomain/zero/1.0/>
 """
 
 
 class CLI:
     def __init__(self):
-        self.sources = [s for s in Service.all()]
+        self.sources = [service for service in Service.all()]
 
         self.parser = ArgumentParser(
             prog=PROGRAM_NAME,
             formatter_class=RawTextHelpFormatter,
-
-            description=textwrap.dedent('''\
+            description=textwrap.dedent(
+                '''\
                 tpsp: transporte público de São Paulo
 
                 tpsp (portuguese for "São Paulo public transportation")
                 is a tiny command-line tool that tells you the current
                 status of CPTM's and Metro lines.
-                '''),
-
-            epilog=textwrap.dedent('''\
+                '''
+            ),
+            epilog=textwrap.dedent(
+                '''\
                 examples:
                     $ tpsp cptm
                     # => shows the current state of all CPTM lines
@@ -84,7 +80,9 @@ class CLI:
                 This is a Free and Open-Source Software (FOSS).
                 Licensed under the MIT License.
 
-                Project page: <https://github.com/caianrais/tpsp>'''))
+                Project page: <https://github.com/caianrais/tpsp>'''
+            ),
+        )
 
         # --------------------------------------------------
 
@@ -94,27 +92,31 @@ class CLI:
             choices=self.sources,
             nargs=1,
             type=str,
-            help='the public transportation service')
+            help='the public transportation service',
+        )
 
         self.parser.add_argument(
-            '-v', '--version',
+            '-v',
+            '--version',
             action='version',
-            version='{0} ({1})'.format(
-                PROGRAM_NAME, PROGRAM_VERSION
-            ),
-            help='show the program version and exit')
+            version='{0} ({1})'.format(PROGRAM_NAME, PROGRAM_VERSION),
+            help='show the program version and exit',
+        )
 
         self.parser.add_argument(
-            '-j', '--json',
+            '-j',
+            '--json',
             action='store_true',
             dest='json',
-            help='show the output in JSON format')
+            help='show the output in JSON format',
+        )
 
         self.parser.add_argument(
             '--copyright',
             action=Copyright,
             nargs=0,
-            help='show the copyright information and exit')
+            help='show the copyright information and exit',
+        )
 
     def act(self):
         return self.parser.parse_args()
@@ -122,7 +124,7 @@ class CLI:
 
 class Copyright(Action):
     def __init__(self, option_strings, dest, **kwargs):
-        super(Copyright, self).__init__(option_strings, dest, **kwargs)
+        super().__init__(option_strings, dest, **kwargs)
 
     def __call__(self, parser, namespace, values, option_string=None):
         print(COPYRIGHT_INFO)
@@ -149,7 +151,7 @@ class CPTM(Service):
             data = res.html.find('.{0}'.format(ref), first=True)
             yield {
                 'line': ref.capitalize(),
-                'status': data.text.replace(ref.upper(), '')
+                'status': data.text.replace(ref.upper(), ''),
             }
 
 
@@ -164,17 +166,14 @@ class METRO(Service):
         names = res.html.find('.{0}'.format('nomeDaLinha'))
         stati = res.html.find('.{0}'.format('statusDaLinha'))
 
-        for i in range(len(names)):
-            name = names[i].text
+        for idx in range(len(names)):
+            name = names[idx].text
             name = name.split('-')[1]
             name = name.strip()
 
-            status = stati[i].text
+            status = stati[idx].text
 
-            yield {
-                'line': name,
-                'status': status
-            }
+            yield {'line': name, 'status': status}
 
 
 class Output:
@@ -184,8 +183,8 @@ class Output:
     @property
     def table(self):
         def header(cols):
-            for c in cols:
-                yield '{}{}{}'.format(Style.BRIGHT, c, Style.RESET_ALL)
+            for col in cols:
+                yield '{}{}{}'.format(Style.BRIGHT, col, Style.RESET_ALL)
 
         def line_status(status):
             color = Fore.WHITE
@@ -204,28 +203,19 @@ class Output:
             return '{}{}{}'.format(color, status.title(), Style.RESET_ALL)
 
         def beautify():
-            for d in self.data:
-                yield [
-                    d['line'], line_status(d['status'].lower())
-                ]
+            for data in self.data:
+                yield [data['line'], line_status(data['status'].lower())]
 
         cols = ['Linha', 'Status']
-        data = [d for d in beautify()]
-        head = [h for h in header(cols)]
-
-        return tabulate(data, headers=head)
+        return tabulate(list(beautify()), headers=list(header(cols)))
 
     @property
     def json(self):
         return json.dumps(
-            {
-                'code': 200,
-                'data': [d for d in self.data],
-                'message': 'success'
-            },
+            {'code': 200, 'data': list(self.data), 'message': 'success'},
             ensure_ascii=False,
             sort_keys=True,
-            indent=4
+            indent=4,
         )
 
 
@@ -241,9 +231,7 @@ def main():
     data = fetch(args.service)
     outp = Output(data)
 
-    print('\n{}'.format(
-        outp.json if args.json else outp.table
-    ))
+    print('\n{}'.format(outp.json if args.json else outp.table))
 
 
 if __name__ == '__main__':
