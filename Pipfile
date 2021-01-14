@@ -15,6 +15,10 @@ argh = "*"
 black = "*"
 jedi = "*"
 
+[scripts]
+standard = "black -S tpsp"
+lint = "pylint tpsp"
+
 [requires]
 python_version = "3.6"
 
