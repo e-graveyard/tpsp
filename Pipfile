@@ -14,6 +14,7 @@ pylint = "*"
 argh = "*"
 black = "*"
 jedi = "*"
+twine = "*"
 
 [scripts]
 standard = "black -S tpsp"
