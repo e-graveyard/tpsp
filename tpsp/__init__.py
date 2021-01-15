@@ -1,3 +1,5 @@
+# pylint: disable=too-few-public-methods
+
 # Standard libraries. Should not fail.
 import sys
 import json
@@ -28,7 +30,7 @@ except ImportError as err:
 
 PROGRAM_NAME = 'tpsp'
 PROGRAM_AUTHOR = 'Caian R. Ertl'
-PROGRAM_VERSION = 'v0.1.3'
+PROGRAM_VERSION = 'v0.1.5'
 
 COPYRIGHT_INFO = """
 The person who associated a work with this deed has dedicated the work to the
@@ -78,9 +80,7 @@ class CLI:
                          the output in JSON
 
                 This is a Free and Open-Source Software (FOSS).
-                Licensed under the MIT License.
-
-                Project page: <https://github.com/caianrais/tpsp>'''
+                Project page: <https://github.com/caian-org/tpsp>'''
             ),
         )
 
