@@ -30,7 +30,7 @@ REQUIRED = [
     "fake-useragent==0.1.11",
     "idna==2.10; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
     "importlib-metadata==2.1.1; python_version < '3.8'",
-    "lxml==4.6.2; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
+    "lxml==4.6.3; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
     "parse==1.19.0",
     "pyee==8.1.0",
     "pyppeteer==0.2.5; python_full_version >= '3.6.1' and python_full_version < '4.0.0'",
