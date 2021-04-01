@@ -1,3 +1,14 @@
+[![Build Status][travis-shield]][travis-url] [![Code Quality][lgtm-shield]][lgtm-url] [![GitHub tag][tag-shield]][tag-url]
+
+[travis-shield]: https://img.shields.io/travis/caian-org/tpsp.svg?style=for-the-badge
+[travis-url]: https://travis-ci.org/caian-org/tpsp
+
+[lgtm-shield]: https://img.shields.io/lgtm/grade/python/g/caian-org/tpsp.svg?style=for-the-badge
+[lgtm-url]: https://lgtm.com/projects/g/caian-org/tpsp/context:python
+
+[tag-shield]: https://img.shields.io/github/tag/caian-org/tpsp.svg?style=for-the-badge
+[tag-url]: https://github.com/caian-org/tpsp/releases
+
 # TPSP: Transporte Público de São Paulo
 
 `tpsp` (acrônimo para "Transporte Público de São Paulo") é uma pequena aplicação
