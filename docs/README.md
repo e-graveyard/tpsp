@@ -36,7 +36,7 @@ Metro ou qualquer outro órgão governamental.**
 
 ## Requerimentos
 
-- Python (3.4 ou superior).
+- Python (3.6.1 ou superior).
 
 
 ## Dependências
