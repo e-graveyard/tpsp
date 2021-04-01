@@ -17,8 +17,8 @@ DESCRIPTION = "CLI to CPTM and Metro lines status"
 URL = "https://github.com/caian-org/tpsp"
 EMAIL = "hi@caian.org"
 AUTHOR = "Caian R. Ertl"
-REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.1.5"
+REQUIRES_PYTHON = ">=3.6.1"
+VERSION = "0.1.6"
 REQUIRED = [
     "appdirs==1.4.4",
     "beautifulsoup4==4.9.3",
@@ -116,11 +116,11 @@ setup(
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
         "Environment :: Console",
-        "Development Status :: 4 - Beta",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     entry_points={"console_scripts": ["tpsp = tpsp:main"]},
     # $ setup.py publish support.
