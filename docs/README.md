@@ -1,10 +1,16 @@
-[![Build Status][travis-shield]][travis-url] [![Code Quality][lgtm-shield]][lgtm-url] [![GitHub tag][tag-shield]][tag-url]
+[![Build Status][travis-shield]][travis-url]
+[![Code Quality][lgtm-shield]][lgtm-url]
+[![PyPI Downloads][pypi-shield]][pypi-url]
+[![GitHub tag][tag-shield]][tag-url]
 
 [travis-shield]: https://img.shields.io/travis/caian-org/tpsp.svg?logo=travis-ci&logoColor=FFF&style=flat-square
 [travis-url]: https://travis-ci.org/caian-org/tpsp
 
 [lgtm-shield]: https://img.shields.io/lgtm/grade/python/g/caian-org/tpsp.svg?logo=lgtm&style=flat-square
 [lgtm-url]: https://lgtm.com/projects/g/caian-org/tpsp/context:python
+
+[pypi-shield]: https://img.shields.io/pypi/dm/tpsp?logo=python&logoColor=fff&style=flat-square
+[pypi-url]: https://pypi.org/project/tpsp
 
 [tag-shield]: https://img.shields.io/github/tag/caian-org/tpsp.svg?logo=git&logoColor=FFF&style=flat-square
 [tag-url]: https://github.com/caian-org/tpsp/releases
