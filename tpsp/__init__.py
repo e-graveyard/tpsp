@@ -30,7 +30,7 @@ except ImportError as err:
 
 PROGRAM_NAME = 'tpsp'
 PROGRAM_AUTHOR = 'Caian R. Ertl'
-PROGRAM_VERSION = 'v0.1.5'
+PROGRAM_VERSION = 'v1.0.0'
 
 COPYRIGHT_INFO = """
 The person who associated a work with this deed has dedicated the work to the

@@ -18,7 +18,7 @@ URL = "https://github.com/caian-org/tpsp"
 EMAIL = "hi@caian.org"
 AUTHOR = "Caian R. Ertl"
 REQUIRES_PYTHON = ">=3.6.1"
-VERSION = "0.1.6"
+VERSION = "1.0.0"
 REQUIRED = [
     "appdirs==1.4.4",
     "beautifulsoup4==4.9.3",
