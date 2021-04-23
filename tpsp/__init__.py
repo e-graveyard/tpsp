@@ -221,7 +221,17 @@ def main():
     args = cli.act()
 
     service = getattr(sys.modules[__name__], args.service[0].upper())
-    data = service().fetch_data()
-    outp = Output(data)
 
-    print('\n{}'.format(outp.json if args.json else outp.table))
+    try:
+        data = service().fetch_data()
+        outp = Output(data)
+        print('\n{}'.format(outp.json if args.json else outp.table))
+
+    except Exception as err:
+        print('Could not fetch data\n')
+        print(str(err))
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()
