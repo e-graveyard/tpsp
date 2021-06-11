@@ -42,7 +42,7 @@ REQUIRED = [
     "tqdm==4.59.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
     "urllib3==1.26.4; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_full_version < '4.0.0'",
     "w3lib==1.22.0",
-    "websockets==8.1; python_full_version >= '3.6.1'",
+    "websockets==9.1; python_full_version >= '3.6.1'",
 ]
 
 here = os.path.abspath(os.path.dirname(__file__))
