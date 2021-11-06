@@ -111,7 +111,7 @@ alterar, compartilhar ou fazer o que quiser com este projeto! [`^ C ^ V`][kopimi
 
 [![License][cc-shield]][cc-url]
 
-[me]: https://github.com/caiertl
+[me]: https://github.com/upsetbit
 [cc-shield]: https://forthebadge.com/images/badges/cc-0.svg
 [cc-url]: http://creativecommons.org/publicdomain/zero/1.0
 
