@@ -29,8 +29,9 @@ except ImportError as err:
 
 
 PROGRAM_NAME = 'tpsp'
-PROGRAM_AUTHOR = 'Caian R. Ertl'
-PROGRAM_VERSION = 'v1.0.0'
+PROGRAM_DESCRIPTION = 'CLI to CPTM and Metro lines status'
+PROGRAM_VERSION = '1.0.1'
+PROGRAM_URL = 'https://github.com/caian-org/tpsp'
 
 COPYRIGHT_INFO = """
 The person who associated a work with this deed has dedicated the work to the
@@ -62,25 +63,25 @@ class CLI:
             formatter_class=RawTextHelpFormatter,
             description=textwrap.dedent(
                 '''\
-                tpsp: transporte público de São Paulo
+                {0}: {1}
 
-                tpsp (portuguese for "São Paulo public transportation")
+                {0} (portuguese for "São Paulo public transportation")
                 is a tiny command-line tool that tells you the current
                 status of CPTM's and Metro lines.
-                '''
+                '''.format(PROGRAM_NAME, PROGRAM_DESCRIPTION)
             ),
             epilog=textwrap.dedent(
                 '''\
                 examples:
-                    $ tpsp cptm
+                    $ {0} cptm
                     # => shows the current state of all CPTM lines
 
-                    $ tpsp metro --json
+                    $ {0} metro --json
                     # => shows the current state of all Metro lines and formats
                          the output in JSON
 
                 This is a Free and Open-Source Software (FOSS).
-                Project page: <https://github.com/caian-org/tpsp>'''
+                Project page: <{1}>'''.format(PROGRAM_NAME, PROGRAM_URL)
             ),
         )
 
@@ -227,9 +228,9 @@ def main():
         outp = Output(data)
         print('\n{}'.format(outp.json if args.json else outp.table))
 
-    except Exception as err:
+    except Exception as error:
         print('Could not fetch data\n')
-        print(str(err))
+        print(str(error))
         sys.exit(1)
 
 
