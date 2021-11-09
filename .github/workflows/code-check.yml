@@ -36,6 +36,15 @@ jobs:
         run: |
           python -m pip install --upgrade pipenv wheel setuptools
 
+      - name: Install python dependencies
+        run: pipenv install --system --deploy --dev
+
+      - name: Check code style
+        run: black -l 100 -S --check tpsp
+
+      - name: Check lint
+        run: pylint --fail-under 9 --rcfile .pylintrc --output-format colorized --verbose tpsp
+
       - name: Install TPSP
         run: python setup.py install
 
@@ -50,12 +59,3 @@ jobs:
           tpsp cptm
           sleep 5
           tpsp cptm --json
-
-      - name: Install python dependencies
-        run: pipenv install --system --deploy --dev
-
-      - name: Check code style
-        run: black -l 100 -S --check tpsp
-
-      - name: Check lint
-        run: pylint --fail-under 9 --rcfile .pylintrc --output-format colorized --verbose tpsp
