@@ -1,10 +1,10 @@
-[![Build Status][travis-shield]][travis-url]
+[![Code Checks][gh-tc-shield]][gh-tc-url]
 [![Code Quality][lgtm-shield]][lgtm-url]
 [![PyPI Downloads][pypi-shield]][pypi-url]
 [![GitHub tag][tag-shield]][tag-url]
 
-[travis-shield]: https://img.shields.io/travis/caian-org/tpsp.svg?logo=travis-ci&logoColor=FFF&style=flat-square
-[travis-url]: https://travis-ci.org/caian-org/tpsp
+[gh-tc-shield]: https://img.shields.io/github/workflow/status/caian-org/tpsp/perform-code-checkings?label=checks&logo=github&style=flat-square
+[gh-tc-url]: https://github.com/caian-org/tpsp/actions/workflows/code-chek.yml
 
 [lgtm-shield]: https://img.shields.io/lgtm/grade/python/g/caian-org/tpsp.svg?logo=lgtm&style=flat-square
 [lgtm-url]: https://lgtm.com/projects/g/caian-org/tpsp/context:python
