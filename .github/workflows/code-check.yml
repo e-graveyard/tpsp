@@ -56,6 +56,6 @@ jobs:
 
       - name: Test command
         run: |
-          tpsp cptm
+          tpsp metro
           sleep 5
-          tpsp cptm --json
+          tpsp metro --json
