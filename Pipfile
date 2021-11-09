@@ -16,6 +16,7 @@ black = "*"
 jedi = "*"
 twine = "*"
 dataclasses = "*"
+typing-extensions = "*"
 
 [scripts]
 "fix:style" = "black -l 100 -S tpsp"
