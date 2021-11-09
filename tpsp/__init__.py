@@ -68,7 +68,9 @@ class CLI:
                 {0} (portuguese for "São Paulo public transportation")
                 is a tiny command-line tool that tells you the current
                 status of CPTM's and Metro lines.
-                '''.format(PROGRAM_NAME, PROGRAM_DESCRIPTION)
+                '''.format(
+                    PROGRAM_NAME, PROGRAM_DESCRIPTION
+                )
             ),
             epilog=textwrap.dedent(
                 '''\
@@ -81,7 +83,9 @@ class CLI:
                          the output in JSON
 
                 This is a Free and Open-Source Software (FOSS).
-                Project page: <{1}>'''.format(PROGRAM_NAME, PROGRAM_URL)
+                Project page: <{1}>'''.format(
+                    PROGRAM_NAME, PROGRAM_URL
+                )
             ),
         )
 
