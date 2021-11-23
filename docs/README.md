@@ -104,7 +104,7 @@ examples:
 
 ## Licença
 
-Na medida do possível sob a lei, [Caian Rais Ertl][me] renunciou a __todos os
+Na medida do possível sob a lei, [Caian Ertl][me] renunciou a __todos os
 direitos autorais e direitos relacionados ou adjacentes a este trabalho__. No
 espírito da _liberdade de informação_, encorajo você a forkar, modificar,
 alterar, compartilhar ou fazer o que quiser com este projeto! [`^ C ^ V`][kopimi]
